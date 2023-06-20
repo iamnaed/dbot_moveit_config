@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="dbot_world">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="dbot_arm">
+        <link name="base_link"/>
+        <link name="j0_link"/>
+        <link name="j1_link"/>
+        <link name="j2_link"/>
+        <link name="j3_link"/>
+        <link name="j4_link"/>
+        <link name="j5_link"/>
+        <link name="flange_link"/>
+        <link name="tcp_link"/>
+        <joint name="j0_joint"/>
+        <joint name="j1_joint"/>
+        <joint name="j2_joint"/>
+        <joint name="j3_joint"/>
+        <joint name="j4_joint"/>
+        <joint name="j5_joint"/>
+        <chain base_link="base_link" tip_link="tcp_link"/>
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="zero" group="dbot_arm">
+        <joint name="j0_joint" value="0"/>
+        <joint name="j1_joint" value="0"/>
+        <joint name="j2_joint" value="0"/>
+        <joint name="j3_joint" value="0"/>
+        <joint name="j4_joint" value="0"/>
+        <joint name="j5_joint" value="0"/>
+    </group_state>
+    <group_state name="home" group="dbot_arm">
+        <joint name="j0_joint" value="0"/>
+        <joint name="j1_joint" value="-0.7463"/>
+        <joint name="j2_joint" value="1.6836"/>
+        <joint name="j3_joint" value="2.1695"/>
+        <joint name="j4_joint" value="1.7183"/>
+        <joint name="j5_joint" value="0"/>
+    </group_state>
+    <group_state name="home2" group="dbot_arm">
+        <joint name="j0_joint" value="0"/>
+        <joint name="j1_joint" value="1.2323"/>
+        <joint name="j2_joint" value="-2.3431"/>
+        <joint name="j3_joint" value="-0.3298"/>
+        <joint name="j4_joint" value="1.5447"/>
+        <joint name="j5_joint" value="0"/>
+    </group_state>
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="base_link" link2="j0_link" reason="Adjacent"/>
+    <disable_collisions link1="flange_link" link2="j0_link" reason="Never"/>
+    <disable_collisions link1="flange_link" link2="j2_link" reason="Never"/>
+    <disable_collisions link1="flange_link" link2="j3_link" reason="Never"/>
+    <disable_collisions link1="flange_link" link2="j4_link" reason="Never"/>
+    <disable_collisions link1="flange_link" link2="j5_link" reason="Adjacent"/>
+    <disable_collisions link1="j0_link" link2="j1_link" reason="Adjacent"/>
+    <disable_collisions link1="j0_link" link2="j4_link" reason="Never"/>
+    <disable_collisions link1="j1_link" link2="j2_link" reason="Adjacent"/>
+    <disable_collisions link1="j2_link" link2="j3_link" reason="Adjacent"/>
+    <disable_collisions link1="j2_link" link2="j4_link" reason="Never"/>
+    <disable_collisions link1="j3_link" link2="j4_link" reason="Adjacent"/>
+    <disable_collisions link1="j3_link" link2="j5_link" reason="Never"/>
+    <disable_collisions link1="j4_link" link2="j5_link" reason="Adjacent"/>
+</robot>

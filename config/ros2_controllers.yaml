@@ -1,0 +1,32 @@
+# This config file is used by ros2_control
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    dbot_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+dbot_controller:
+  ros__parameters:
+    joints:
+      - j0_joint
+      - j1_joint
+      - j2_joint
+      - j3_joint
+      - j4_joint
+      - j5_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+      - acceleration
+
+joint_state_broadcaster:
+  ros__parameters:
+    map_interface_to_joint_state:
+      effort: acceleration

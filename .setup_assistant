@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: dbot
+    relative_path: urdf/dbot_world.xacro
+  srdf:
+    relative_path: config/dbot_world.srdf
+  package_settings:
+    author_name: Dean
+    author_email: deanmacasilhig@gmail.com
+    generated_timestamp: 1687235748
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
