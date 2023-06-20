@@ -24,9 +24,8 @@ dbot_arm_controller:
     state_interfaces:
       - position
       - velocity
-      - acceleration
 
-joint_state_broadcaster:
-  ros__parameters:
-    map_interface_to_joint_state:
-      effort: acceleration
+# joint_state_broadcaster:
+#   ros__parameters:
+#     map_interface_to_joint_state:
+#       effort: acceleration
